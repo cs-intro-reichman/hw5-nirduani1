@@ -41,15 +41,26 @@ public class MyString {
      * @return true is str1 is a subset of str2, false otherwise
      */
     public static boolean subsetOf(String str1, String str2) {
-        for (int i = 0; i < str1.length() ; i++) {
-            char ch = str1.charAt(i) ;
-            int countInStr1 = countChar(str1, ch) ;
-            int countInStr2 = countChar(str2, ch) ;
-            if (countInStr1 > countInStr2) {
-                return false ;
+        String copyStr2 = str2;
+        for (int i=0; i<str1.length(); i++) {
+            if (countChar(copyStr2, str1.charAt(i)) == 0) {
+                return false;
+            } else {
+                for 
+                (int j=0; j<copyStr2.length(); j++) {
+                    if (str1.charAt(i) == copyStr2.charAt(j)) {
+                        if (j == 0) {
+                            copyStr2 = copyStr2.substring(1);
+                        } else if (j == (copyStr2.length()-1)) {
+                            copyStr2 = copyStr2.substring(0 , j);
+                        } else {
+                            copyStr2 = copyStr2.substring(0 , j) + copyStr2.substring(j+1);
+                        }
+                    }
+                }
             }
         }
-        return true ;
+     return true;
     }
 
     /** Returns a string which is the same as the given string, with a space
@@ -64,7 +75,9 @@ public class MyString {
         String spacedString = "" ;
         for (int i = 0; i < str.length() ; i++) {
             spacedString = spacedString + str.charAt(i) ;
-            spacedString = spacedString + " " ;
+            if (str.length() - 1 != i){
+                spacedString = spacedString + " " ;
+            }
         }
         return spacedString ;
     }
@@ -98,18 +111,31 @@ public class MyString {
      * @param str2 - a string
      * @return a string consisting of str1 minus all the characters of str2
      */
-    public static String remove(String str1, String str2) {
-        String fixString = "" ;
-        for (int i = 0 ; i < str2.length() ; i++) {
-            char ch = str2.charAt(i) ;
-            int countInStr1 = countChar(str1, ch) ;
-            int countInFixString = countChar(fixString, ch) ;
-
-            if (countInFixString >= countInStr1){
-                fixString = fixString + ch ;
+    public static String remove(String str2, String str1) {
+        String newStr = "";
+        int l1=str1.length();
+        int l2=str2.length();
+        if (str2 == "") {
+            return str1;
+        }
+        if (str2 == str1) {
+            return "";
+        }
+        boolean[] used = new boolean[l2];
+        for (int i=0;i<l1;i++) {
+            boolean match = false;
+            for (int j=0;j<l2;j++) {
+                if (!used[j] && str1.charAt(i) == str2.charAt(j)){
+                    used[j]=true;
+                    match = true;
+                    break;
+                }
+            }
+            if (match == false) {
+                newStr = newStr + str1.charAt(i);
             }
         }
-        return fixString ;
+        return newStr;
     }
 
     /**
