@@ -125,6 +125,6 @@ public class MyString {
          int randomIndex = (int) (Math.random() * (str.length() + 1));
          // Insert the character at the random index
          String result = str.substring(0, randomIndex) + ch + str.substring(randomIndex);
-         return result;
+         return result.toLowerCase();
     }    
 }
