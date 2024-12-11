@@ -20,8 +20,13 @@ public class MyString {
      * @return the number of times c appears in str
      */
     public static int countChar(String str, char ch) {
-        //// Replace the following statement with your code
-        return 0;
+        int countChar = 0 ;
+        for (int i = 0; i < str.length(); i++) {
+            if (ch == str.charAt(i)){
+                countChar++ ;
+            }   
+        }
+        return countChar ;
     }
 
     /** Returns true if str1 is a subset string str2, false otherwise
@@ -36,8 +41,26 @@ public class MyString {
      * @return true is str1 is a subset of str2, false otherwise
      */
     public static boolean subsetOf(String str1, String str2) {
-         //// Replace the following statement with your code
-        return false;
+        String copyStr2 = str2;
+        for (int i=0; i<str1.length(); i++) {
+            if (countChar(copyStr2, str1.charAt(i)) == 0) {
+                return false;
+            } else {
+                for 
+                (int j=0; j<copyStr2.length(); j++) {
+                    if (str1.charAt(i) == copyStr2.charAt(j)) {
+                        if (j == 0) {
+                            copyStr2 = copyStr2.substring(1);
+                        } else if (j == (copyStr2.length()-1)) {
+                            copyStr2 = copyStr2.substring(0 , j);
+                        } else {
+                            copyStr2 = copyStr2.substring(0 , j) + copyStr2.substring(j+1);
+                        }
+                    }
+                }
+            }
+        }
+     return true;
     }
 
     /** Returns a string which is the same as the given string, with a space
@@ -49,8 +72,14 @@ public class MyString {
      * @return a string consisting of the characters of str, separated by spaces.
      */
     public static String spacedString(String str) {
-        //// Replace the following statement with your code
-        return null;
+        String spacedString = "" ;
+        for (int i = 0; i < str.length() ; i++) {
+            spacedString = spacedString + str.charAt(i) ;
+            if (str.length() - 1 != i){
+                spacedString = spacedString + " " ;
+            }
+        }
+        return spacedString ;
     }
   
     /**
@@ -64,8 +93,13 @@ public class MyString {
      * @return a randomly generated string, consisting of 'n' lowercase letters
      */
     public static String randomStringOfLetters(int n) {
-        //// Replace the following statement with your code
-        return null;
+        String randomString = "" ; 
+        
+        for (int i = 0 ; i < n ; i++) {
+            char ch = (char)(Math.random()*26 + 97) ;
+            randomString = randomString + ch ;
+        }
+        return randomString;
     }
 
     /**
@@ -78,8 +112,30 @@ public class MyString {
      * @return a string consisting of str1 minus all the characters of str2
      */
     public static String remove(String str1, String str2) {
-       //// Replace the following statement with your code
-        return null;
+        String newStr = "";
+        int l1=str1.length();
+        int l2=str2.length();
+        if (str2.isEmpty()) {
+            return str1;
+        }
+        if (str2.equals(str1)) {
+            return "";
+        }
+        boolean[] used = new boolean[l2];
+        for (int i=0;i<l1;i++) {
+            boolean match = false;
+            for (int j=0;j<l2;j++) {
+                if (!used[j] && str1.charAt(i) == str2.charAt(j)){
+                    used[j]=true;
+                    match = true;
+                    break;
+                }
+            }
+            if (match == false) {
+                newStr = newStr + str1.charAt(i);
+            }
+        }
+        return newStr;
     }
 
     /**
@@ -91,10 +147,10 @@ public class MyString {
      * @return a string consisting of str with ch inserted somewhere
      */
     public static String insertRandomly(char ch, String str) {
-         // Generate a random index between 0 and str.length()
+         // Generate a random index of between 0 and str.lenghth() 
          int randomIndex = (int) (Math.random() * (str.length() + 1));
          // Insert the character at the random index
          String result = str.substring(0, randomIndex) + ch + str.substring(randomIndex);
-         return result;
+         return result.toLowerCase();
     }    
 }
