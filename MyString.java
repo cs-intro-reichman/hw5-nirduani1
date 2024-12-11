@@ -111,11 +111,11 @@ public class MyString {
      * @param str2 - a string
      * @return a string consisting of str1 minus all the characters of str2
      */
-    public static String remove(String str2, String str1) {
+    public static String remove(String str1, String str2) {
         String newStr = "";
         int l1=str1.length();
         int l2=str2.length();
-        if (str2.equals("")) {
+        if (str2.isEmpty()) {
             return str1;
         }
         if (str2.equals(str1)) {
