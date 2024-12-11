@@ -115,10 +115,10 @@ public class MyString {
         String newStr = "";
         int l1=str1.length();
         int l2=str2.length();
-        if (str2 == "") {
+        if (str2.equals("")) {
             return str1;
         }
-        if (str2 == str1) {
+        if (str2.equals(str1)) {
             return "";
         }
         boolean[] used = new boolean[l2];
